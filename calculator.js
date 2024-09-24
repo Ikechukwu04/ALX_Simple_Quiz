@@ -1,37 +1,53 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get references to the input fields and result span
-    const number1 = document.getElementById('number1');
-    const number2 = document.getElementById('number2');
-    const calculationResult = document.getElementById('calculation-result');
+// Define the arithmetic functions
+function add(number1, number2) {
+    return number1 + number2;
+}
 
-    // Functions for arithmetic operations
-    function add() {
-        const result = parseFloat(number1.value) + parseFloat(number2.value);
-        calculationResult.textContent = result;
+function subtract(number1, number2) {
+    return number1 - number2;
+}
+
+function multiply(number1, number2) {
+    return number1 * number2;
+}
+
+function divide(number1, number2) {
+    if (number2 === 0) {
+        return "Cannot divide by zero!";
     }
+    return number1 / number2;
+}
 
-    function subtract() {
-        const result = parseFloat(number1.value) - parseFloat(number2.value);
-        calculationResult.textContent = result;
-    }
+// Function to update the result in the DOM
+function updateResult(result) {
+    document.getElementById("calculation-result").textContent = result;
+}
 
-    function multiply() {
-        const result = parseFloat(number1.value) * parseFloat(number2.value);
-        calculationResult.textContent = result;
-    }
+// Add event listeners to each button
+document.getElementById("add").addEventListener("click", function() {
+    const number1 = parseFloat(document.getElementById("number1").value) || 0;
+    const number2 = parseFloat(document.getElementById("number2").value) || 0;
+    const result = add(number1, number2);
+    updateResult(result);
+});
 
-    function divide() {
-        if (parseFloat(number2.value) === 0) {
-            calculationResult.textContent = 'Error: Division by zero';
-        } else {
-            const result = parseFloat(number1.value) / parseFloat(number2.value);
-            calculationResult.textContent = result;
-        }
-    }
+document.getElementById("subtract").addEventListener("click", function() {
+    const number1 = parseFloat(document.getElementById("number1").value) || 0;
+    const number2 = parseFloat(document.getElementById("number2").value) || 0;
+    const result = subtract(number1, number2);
+    updateResult(result);
+});
 
-    // Attach event listeners to buttons
-    document.getElementById('add').addEventListener('click', add);
-    document.getElementById('subtract').addEventListener('click', subtract);
-    document.getElementById('multiply').addEventListener('click', multiply);
-    document.getElementById('divide').addEventListener('click', divide);
+document.getElementById("multiply").addEventListener("click", function() {
+    const number1 = parseFloat(document.getElementById("number1").value) || 0;
+    const number2 = parseFloat(document.getElementById("number2").value) || 0;
+    const result = multiply(number1, number2);
+    updateResult(result);
+});
+
+document.getElementById("divide").addEventListener("click", function() {
+    const number1 = parseFloat(document.getElementById("number1").value) || 0;
+    const number2 = parseFloat(document.getElementById("number2").value) || 0;
+    const result = divide(number1, number2);
+    updateResult(result);
 });
